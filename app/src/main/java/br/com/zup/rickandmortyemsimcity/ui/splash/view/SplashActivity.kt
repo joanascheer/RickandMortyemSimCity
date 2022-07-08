@@ -1,10 +1,10 @@
-package br.com.zup.rickandmortyemsimcity.ui.view.splash
+package br.com.zup.rickandmortyemsimcity.ui.splash.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import br.com.zup.rickandmortyemsimcity.databinding.ActivitySplashBinding
-import br.com.zup.rickandmortyemsimcity.ui.view.home.HomeActivity
+import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {

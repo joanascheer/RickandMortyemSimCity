@@ -3,7 +3,7 @@ package br.com.zup.rickandmortyemsimcity.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class CharacterResult(
     @SerializedName("created")
     val created: String,
     @SerializedName("episode")

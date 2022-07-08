@@ -1,4 +1,4 @@
-package br.com.zup.rickandmortyemsimcity.ui.view.home
+package br.com.zup.rickandmortyemsimcity.ui.home.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -1,4 +1,4 @@
-package br.com.zup.rickandmortyemsimcity.ui.view.characterlist.view
+package br.com.zup.rickandmortyemsimcity.ui.characterlist.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterListBinding
-import br.com.zup.rickandmortyemsimcity.ui.view.home.HomeActivity
+import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 
 
 class CharacterListFragment : Fragment() {

@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface CharacterAPI {
     @GET("character")
-    suspend fun getAllCharacters() : CharacterResponse
+    suspend fun getAllCharactersNetwork() : CharacterResponse
 }
