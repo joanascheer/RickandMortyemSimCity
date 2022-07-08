@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvItem"
-    android:layout_width="@dimen/size_150"
-    android:layout_height="@dimen/size_150"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,21 +16,21 @@
             android:layout_height="@dimen/size_150"
             android:contentDescription="@string/character_img_description_txt"
             android:src="@drawable/rick_morty"
-            app:layout_constraintBaseline_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvCharacterName"
             android:layout_width="@dimen/size_150"
-            android:layout_height="@dimen/size_30"
+            android:layout_height="30dp"
+            android:padding="5dp"
             android:background="@color/dark_purple"
             android:gravity="center"
             android:text="@string/character_name_txt"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_14"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivCharacter"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacter"
             app:layout_constraintEnd_toEndOf="@id/ivCharacter"
             app:layout_constraintStart_toStartOf="@id/ivCharacter" />
 
