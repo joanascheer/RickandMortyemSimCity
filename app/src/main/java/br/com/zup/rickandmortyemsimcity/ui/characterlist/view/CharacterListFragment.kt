@@ -4,16 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
+import androidx.recyclerview.widget.GridLayoutManager
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterListBinding
 import br.com.zup.rickandmortyemsimcity.ui.characterlist.viewmodel.CharacterViewModel
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
+import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 
 
 class CharacterListFragment : Fragment() {
@@ -23,9 +26,9 @@ class CharacterListFragment : Fragment() {
         ViewModelProvider(this)[CharacterViewModel::class.java]
     }
 
-//private val adapter: CharacterAdapter by lazy {
-//CharacterAdapter(arrayListOf(), this::goToCharacterDetails)
-//}
+    private val adapter: CharacterAdapter by lazy {
+        CharacterAdapter(arrayListOf(), this::goToCharacterDetails)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,9 +42,42 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
+
+        showRecyclerView()
     }
 
-    private fun goToCharacterDetails() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getAllCharactersNetwork()
+    }
+
+    private fun initObserver() {
+        viewModel.characterListState.observe(this.viewLifecycleOwner) {
+
+            when (it) {
+                is ViewState.Success -> {
+                    adapter.updateCharacterList(it.data.toMutableList())
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "${it.throwable.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else -> {}
+            }
+        }
+    }
+
+    private fun showRecyclerView() {
+        initObserver()
+        binding.rvCharacterList.adapter = adapter
+        binding.rvCharacterList.layoutManager = GridLayoutManager(context, 2)
+    }
+
+
+    private fun goToCharacterDetails(characterResult: CharacterResult) {
         val bundle = bundleOf(CHARACTER_KEY to CharacterResult())
 
         NavHostFragment.findNavController(this).navigate(

@@ -16,7 +16,7 @@ class CharacterViewModel(application: Application) : AndroidViewModel(applicatio
     private val characterUseCase = CharacterUseCase()
     val characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
 
-    fun getAllCharacters() {
+    fun getAllCharactersNetwork() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
