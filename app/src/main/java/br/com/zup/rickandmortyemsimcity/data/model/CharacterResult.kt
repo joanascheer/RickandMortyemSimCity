@@ -32,4 +32,5 @@ data class CharacterResult(
     var type: String = "",
     @SerializedName("url")
     var url: String = ""
+
 ):Parcelable
