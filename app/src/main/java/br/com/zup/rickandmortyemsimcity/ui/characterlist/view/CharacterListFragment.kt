@@ -78,10 +78,10 @@ class CharacterListFragment : Fragment() {
 
 
     private fun goToCharacterDetails(characterResult: CharacterResult) {
-        val bundle = bundleOf(CHARACTER_KEY to CharacterResult())
+        val bundle = bundleOf(CHARACTER_KEY to characterResult)
 
         NavHostFragment.findNavController(this).navigate(
-            R.id.action_characterListFragment_to_characterDetailsFragment
+            R.id.action_characterListFragment_to_characterDetailsFragment, bundle
         )
     }
 
