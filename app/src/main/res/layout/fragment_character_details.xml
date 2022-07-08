@@ -1,14 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark_purple"
     tools:context=".ui.characterdetails.view.CharacterDetailsFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/ivCharacterDetail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_250"
+            android:contentDescription="@string/character_img_description_txt"
+            android:scaleType="centerCrop"
+            android:src="@drawable/rick_morty"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvCharacterNameDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/nome_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterNameFieldDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/nome_field_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvCharacterNameDetail"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterStatusDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/status_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterNameDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterStatusFieldDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/status_field_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvCharacterNameDetail"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterNameFieldDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterSpeciesDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/especie_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterStatusDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterSpeciesFieldDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/especie_field_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvCharacterSpeciesDetail"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterStatusFieldDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterGenderDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/genero_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterSpeciesDetail" />
+
+        <TextView
+            android:id="@+id/tvCharacterGenderFieldDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:text="@string/genero_field_txt"
+            android:textColor="@color/white"
+            android:textSize="@dimen/txt_size_15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/tvCharacterSpeciesDetail"
+            app:layout_constraintTop_toBottomOf="@id/tvCharacterSpeciesFieldDetail" />
+
+        <ImageView
+            android:id="@+id/ivFavorite"
+            android:layout_width="@dimen/size_40"
+            android:layout_height="@dimen/size_40"
+            android:src="@drawable/ic_white_star"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:foregroundGravity="right"
+            android:layout_margin="@dimen/margin_16"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

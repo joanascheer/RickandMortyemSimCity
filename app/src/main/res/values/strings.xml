@@ -6,4 +6,12 @@
     <string name="rick_and_morty_title">Rick and Morty</string>
     <string name="character_name_txt">Nome Personagem</string>
     <string name="character_img_description_txt">Personagem da série Rick and Morty</string>
+    <string name="nome_txt">Nome:</string>
+    <string name="nome_field_txt">Nome do personagem aqui</string>
+    <string name="status_txt">Status:</string>
+    <string name="status_field_txt">Status do personagem aqui</string>
+    <string name="especie_txt">Espécie:</string>
+    <string name="especie_field_txt">Espécie do personagem aqui</string>
+    <string name="genero_txt">Gênero:</string>
+    <string name="genero_field_txt">Gênero do personagem aqui</string>
 </resources>
