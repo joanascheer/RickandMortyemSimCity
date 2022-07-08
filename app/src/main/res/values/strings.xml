@@ -14,4 +14,5 @@
     <string name="especie_field_txt">Espécie do personagem aqui</string>
     <string name="genero_txt">Gênero:</string>
     <string name="genero_field_txt">Gênero do personagem aqui</string>
+    <string name="floating_btn_txt_description">Botão flutuante que leva para a tela de personagens favoritos.</string>
 </resources>

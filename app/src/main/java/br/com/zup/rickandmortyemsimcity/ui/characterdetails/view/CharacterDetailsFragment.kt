@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.JPEG
 import br.com.zup.rickandmortyemsimcity.R
@@ -21,6 +23,7 @@ class CharacterDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -28,6 +31,7 @@ class CharacterDetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getData()
+
     }
 
     private fun getData() {
