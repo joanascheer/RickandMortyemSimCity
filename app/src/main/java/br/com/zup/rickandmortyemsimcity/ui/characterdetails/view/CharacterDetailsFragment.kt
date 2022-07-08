@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.JPEG
+import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.URL_BASE_IMG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
@@ -25,6 +26,7 @@ class CharacterDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getData()
     }
 
@@ -32,7 +34,7 @@ class CharacterDetailsFragment : Fragment() {
         val character = arguments?.getParcelable<CharacterResult>(CHARACTER_KEY)
 
         character?.let {
-            Picasso.get().load(URL_BASE_IMG + it.id + JPEG)
+            Picasso.get().load(URL_BASE_IMG + it.id + JPEG).into(binding.ivCharacterDetail)
             binding.tvCharacterNameFieldDetail.text = it.name
             binding.tvCharacterStatusFieldDetail.text = it.status
             binding.tvCharacterSpeciesFieldDetail.text = it.species

@@ -2,8 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cvItem"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="@dimen/size_150"
+    android:layout_height="@dimen/size_150"
     android:layout_margin="@dimen/margin_8">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -15,7 +15,6 @@
             android:layout_width="@dimen/size_150"
             android:layout_height="@dimen/size_150"
             android:contentDescription="@string/character_img_description_txt"
-            android:scaleType="centerCrop"
             android:src="@drawable/rick_morty"
             app:layout_constraintBaseline_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

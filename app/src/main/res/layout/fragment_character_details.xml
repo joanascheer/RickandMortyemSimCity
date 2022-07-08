@@ -2,14 +2,15 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="3000dp"
     android:background="@color/dark_purple"
     tools:context=".ui.characterdetails.view.CharacterDetailsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp">
 
         <ImageView
             android:id="@+id/ivCharacterDetail"
@@ -121,12 +122,11 @@
             android:id="@+id/ivFavorite"
             android:layout_width="@dimen/size_40"
             android:layout_height="@dimen/size_40"
-            android:src="@drawable/ic_white_star"
-            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="@dimen/margin_16"
             android:foregroundGravity="right"
-            android:layout_margin="@dimen/margin_16"/>
-
+            android:src="@drawable/ic_white_star"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
