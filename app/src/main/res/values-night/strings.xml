@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="splash_screen_description">Tela de inicialização com imagem dos personagens Rick e Morty em um local de outra dimensão e um portal verde atrás deles.</string>
+    <string name="rick_and_morty_title">Rick and Morty</string>
+</resources>
