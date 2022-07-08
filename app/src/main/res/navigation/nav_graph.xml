@@ -9,5 +9,14 @@
         android:id="@+id/characterListFragment"
         android:name="br.com.zup.rickandmortyemsimcity.ui.characterlist.view.CharacterListFragment"
         android:label="fragment_character_list"
-        tools:layout="@layout/fragment_character_list" />
+        tools:layout="@layout/fragment_character_list" >
+        <action
+            android:id="@+id/action_characterListFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/characterDetailsFragment"
+        android:name="br.com.zup.rickandmortyemsimcity.ui.characterdetails.view.CharacterDetailsFragment"
+        android:label="fragment_character_details"
+        tools:layout="@layout/fragment_character_details" />
 </navigation>
