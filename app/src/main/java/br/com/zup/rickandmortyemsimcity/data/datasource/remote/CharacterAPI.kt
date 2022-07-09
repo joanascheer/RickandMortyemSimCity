@@ -6,5 +6,8 @@ import retrofit2.http.Query
 
 interface CharacterAPI {
     @GET("character")
-    suspend fun getAllCharactersNetwork() : CharacterResponse
+    suspend fun getAllCharactersNetwork(
+        @Query("page")
+        page: Int = 22
+    ) : CharacterResponse
 }

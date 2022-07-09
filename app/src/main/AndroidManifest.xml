@@ -21,7 +21,7 @@
         <activity
             android:name="br.com.zup.rickandmortyemsimcity.ui.splash.view.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.RickAndMortyEmSimCity.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

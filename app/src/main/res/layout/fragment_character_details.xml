@@ -10,7 +10,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ivCharacterDetail"
@@ -126,7 +126,7 @@
             android:foregroundGravity="right"
             android:src="@drawable/ic_white_star"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail" />
+            app:layout_constraintTop_toBottomOf="@id/ivCharacterDetail"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

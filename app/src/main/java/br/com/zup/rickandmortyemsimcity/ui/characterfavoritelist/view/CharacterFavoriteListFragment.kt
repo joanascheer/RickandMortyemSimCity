@@ -52,10 +52,10 @@ class CharacterFavoriteListFragment : Fragment() {
         initObserver()
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.getAllFavoriteCharacters()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        viewModel.getAllFavoriteCharacters()
+//    }
 
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)

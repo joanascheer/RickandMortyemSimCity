@@ -13,8 +13,10 @@ import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.rickandmortyemsimcity.*
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
+import br.com.zup.rickandmortyemsimcity.ui.characterdetails.viewmodel.CharacterDetailsViewModel
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.CharacterFavoriteListAdapter
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.CharacterFavoriteListViewModel
+import br.com.zup.rickandmortyemsimcity.ui.characterlist.view.CharacterAdapter
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
@@ -28,8 +30,16 @@ class CharacterDetailsFragment(
         ViewModelProvider(this)[CharacterFavoriteListViewModel::class.java]
     }
 
+    private val viewModelDet: CharacterDetailsViewModel by lazy {
+        ViewModelProvider(this)[CharacterDetailsViewModel::class.java]
+    }
+
     private val adapter: CharacterFavoriteListAdapter by lazy {
         CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetails, this::unfavoriteCharacter)
+    }
+
+    private val adapterPrin: CharacterAdapter by lazy {
+        CharacterAdapter(arrayListOf(), this::goToCharacterDetails)
     }
 
     override fun onCreateView(
@@ -53,7 +63,9 @@ class CharacterDetailsFragment(
         val character = arguments?.getParcelable<CharacterResult>(CHARACTER_KEY)
 
         if (character != null) {
+            viewModel.updateCharacterFavorite(character)
             favoriteCharacter(character)
+            adapter.notifyDataSetChanged()
         }
 
         character?.let {
@@ -62,7 +74,7 @@ class CharacterDetailsFragment(
             binding.tvCharacterStatusFieldDetail.text = it.status
             binding.tvCharacterSpeciesFieldDetail.text = it.species
             binding.tvCharacterGenderFieldDetail.text = it.gender
-            (activity as HomeActivity).supportActionBar?.title = it.name
+
 
             binding.ivFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -74,6 +86,7 @@ class CharacterDetailsFragment(
                 )
             )
 
+            (activity as HomeActivity).supportActionBar?.title = it.name
 
         }
     }
@@ -83,7 +96,10 @@ class CharacterDetailsFragment(
             character.isFavorite = !character.isFavorite
             favoriteCharacterUpdate(character)
             viewModel.unfavoriteCharacter(character)
+            viewModel.updateCharacterFavorite(character)
+            viewModelDet.updateFavoriteCharacters(character)
             adapter.notifyDataSetChanged()
+            //preciso fazer update na lista aqui
 
             binding.ivFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -137,6 +153,7 @@ class CharacterDetailsFragment(
                             "Personagem ${it.data.name} desfavoritado com sucesso.",
                             Toast.LENGTH_LONG
                         ).show()
+
                     }
                 }
                 is ViewState.Error -> {
