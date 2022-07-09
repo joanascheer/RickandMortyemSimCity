@@ -32,19 +32,6 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
         }
     }
 
-    fun changeCharacterFavoriteStatus(character: CharacterResult) {
-        viewModelScope.launch {
-            try {
-                val response = withContext(Dispatchers.IO) {
-                    characterUseCase.updateFavoriteCharacters(character)
-                }
-            } catch (e: Exception) {
-                characterFavoriteState.value =
-                    ViewState.Error(Throwable(ERROR_UNFAVORITE_CHARACTER))
-            }
-        }
-    }
-
     fun updateCharacterFavorite(character: CharacterResult) {
         viewModelScope.launch {
             try {
@@ -55,6 +42,20 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
             } catch (ex: Exception) {
                 characterFavoriteListState.value =
                     ViewState.Error(Throwable("Não foi possível atualizar lista de favoritos!"))
+            }
+        }
+    }
+
+    fun unfavoriteCharacter (character: CharacterResult) {
+        viewModelScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    characterUseCase.updateFavoriteCharacters(character)
+                }
+                characterFavoriteState.value = response
+            } catch (e: Exception) {
+                characterFavoriteListState.value =
+                    ViewState.Error(Throwable(ERROR_UNFAVORITE_CHARACTER))
             }
         }
     }

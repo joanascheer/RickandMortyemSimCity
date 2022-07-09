@@ -88,40 +88,36 @@ class CharacterDetailsFragment(
                         R.drawable.ic_white_star
                 )
             )
-
-            //enviar objeto de volta pra lista inicial || lista de fav
-            val bundle = bundleOf(UPDATED_CHARACTER to character)
-//            NavHostFragment.findNavController(this)
-//                .navigate(R.id.action_characterDetailsFragment_to_characterListFragment,bundle)
+            favoriteCharacterUpdate(character)
         }
     }
 
     private fun initObserver() {
         viewModel.characterFavoriteState.observe(this.viewLifecycleOwner) {
-        when (it) {
-            is ViewState.Success -> {
-                Toast.makeText(
-                    context,
-                    "O personagem ${it.data.name} foi favoritado com sucesso",
-                    Toast.LENGTH_LONG
-                ).show()
+            when (it) {
+                is ViewState.Success -> {
+                    Toast.makeText(
+                        context,
+                        "O personagem ${it.data.name} foi favoritado com sucesso",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "${it.throwable.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ViewState.EmptyList -> {
+                    Toast.makeText(
+                        context,
+                        EMPTY_LIST_MSG,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else -> {}
             }
-            is ViewState.Error -> {
-                Toast.makeText(
-                    context,
-                    "${it.throwable.message}",
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            is ViewState.EmptyList -> {
-                Toast.makeText(
-                    context,
-                    EMPTY_LIST_MSG,
-                    Toast.LENGTH_LONG
-                ).show()
-            }
-            else -> {}
-        }
         }
 
     }
