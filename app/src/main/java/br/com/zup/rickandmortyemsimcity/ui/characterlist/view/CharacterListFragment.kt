@@ -2,6 +2,7 @@ package br.com.zup.rickandmortyemsimcity.ui.characterlist.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
+import br.com.zup.rickandmortyemsimcity.EMPTY_LIST_MSG
 import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterListBinding
@@ -35,6 +37,7 @@ class CharacterListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharacterListBinding.inflate(inflater, container, false)
+        customAppBar()
         return binding.root
     }
 
@@ -42,7 +45,6 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
-
         showRecyclerView()
     }
 
@@ -65,6 +67,13 @@ class CharacterListFragment : Fragment() {
                         Toast.LENGTH_LONG
                     ).show()
                 }
+                is ViewState.EmptyList -> {
+                    Toast.makeText(
+                        context,
+                        EMPTY_LIST_MSG,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
                 else -> {}
             }
         }
@@ -84,5 +93,11 @@ class CharacterListFragment : Fragment() {
             R.id.action_characterListFragment_to_characterDetailsFragment, bundle
         )
     }
+
+    private fun customAppBar() {
+        (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+
 
 }

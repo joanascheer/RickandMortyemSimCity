@@ -1,10 +1,11 @@
 package br.com.zup.rickandmortyemsimcity.data.datasource.local
 
+import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
-
+@Dao
 interface CharacterDAO {
 
     @Query("SELECT * FROM characters ORDER BY name ASC")

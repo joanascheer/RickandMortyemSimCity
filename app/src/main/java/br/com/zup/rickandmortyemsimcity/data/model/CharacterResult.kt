@@ -16,8 +16,6 @@ data class CharacterResult(
 
     @SerializedName("created")
     var created: String = "",
-    @SerializedName("episode")
-    var episode: List<String> = listOf(),
     @SerializedName("gender")
     var gender: String = "",
     @SerializedName("image")

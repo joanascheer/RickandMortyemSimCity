@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class CharacterViewModel(application: Application) : AndroidViewModel(application) {
-    private val characterUseCase = CharacterUseCase()
+    private val characterUseCase = CharacterUseCase(application)
     val characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
 
     fun getAllCharactersNetwork() {

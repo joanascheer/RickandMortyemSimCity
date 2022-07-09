@@ -2,14 +2,12 @@ package br.com.zup.rickandmortyemsimcity.ui.characterdetails.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.JPEG
-import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.URL_BASE_IMG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
@@ -23,7 +21,7 @@ class CharacterDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
-
+customAppBar()
         return binding.root
     }
 
@@ -46,5 +44,10 @@ class CharacterDetailsFragment : Fragment() {
             (activity as HomeActivity).supportActionBar?.title = it.name
         }
     }
+
+    private fun customAppBar() {
+        (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
 
 }
