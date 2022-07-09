@@ -6,3 +6,5 @@ const val SINGLELIVEEVET_LOG_MSG = "Múltiplos observáveis registraods mas apen
 const val URL_BASE_IMG = "https://rickandmortyapi.com/api/character/avatar/"
 const val JPEG = ".jpeg"
 const val EMPTY_LIST_MSG = "Sua lista de personagens está vazia!"
+const val FAIL_LOAD_FAVORITE_LIST_MSG = "Não foi possível carregar sua lista de personagens favoritos."
+const val FAIL_UPDATE_FAVORITE_LIST_MSG = "Não foi possível atualizar seus personagens favoritos."

@@ -16,4 +16,10 @@ class CharacterRepository(private val characterDao: CharacterDAO) {
     suspend fun getAllCharactersNetwork() : CharacterResponse {
         return RetrofitService.apiService.getAllCharactersNetwork()
     }
+
+    suspend fun getAllFavoriteCharacters(): List<CharacterResult> = characterDao.getAllFavoriteCharacters()
+
+    suspend fun updateFavoriteCharacters(character: CharacterResult) {
+        characterDao.updateFavoriteCharacters(character)
+    }
 }
