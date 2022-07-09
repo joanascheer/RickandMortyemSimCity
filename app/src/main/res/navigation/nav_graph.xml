@@ -13,10 +13,22 @@
         <action
             android:id="@+id/action_characterListFragment_to_characterDetailsFragment"
             app:destination="@id/characterDetailsFragment" />
+        <action
+            android:id="@+id/action_characterListFragment_to_characterFavoriteListFragment"
+            app:destination="@id/characterFavoriteListFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"
         android:name="br.com.zup.rickandmortyemsimcity.ui.characterdetails.view.CharacterDetailsFragment"
         android:label="fragment_character_details"
         tools:layout="@layout/fragment_character_details" />
+    <fragment
+        android:id="@+id/characterFavoriteListFragment"
+        android:name="br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.view.CharacterFavoriteListFragment"
+        android:label="fragment_character_favorite_list"
+        tools:layout="@layout/fragment_character_favorite_list" >
+        <action
+            android:id="@+id/action_characterFavoriteListFragment_to_characterDetailsFragment"
+            app:destination="@id/characterDetailsFragment" />
+    </fragment>
 </navigation>

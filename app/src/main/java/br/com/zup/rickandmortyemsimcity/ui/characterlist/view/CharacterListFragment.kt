@@ -46,11 +46,23 @@ class CharacterListFragment : Fragment() {
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
         showRecyclerView()
+        clickFloatActionBtn()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.getAllCharactersNetwork()
+    }
+
+    private fun clickFloatActionBtn() {
+        binding.floatingActionButton.setOnClickListener {
+            goToCharacterFavoriteList()
+        }
+    }
+
+    private fun goToCharacterFavoriteList() {
+        NavHostFragment.findNavController(this)
+            .navigate(R.id.action_characterListFragment_to_characterFavoriteListFragment)
     }
 
     private fun initObserver() {
@@ -97,7 +109,6 @@ class CharacterListFragment : Fragment() {
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
-
 
 
 }
