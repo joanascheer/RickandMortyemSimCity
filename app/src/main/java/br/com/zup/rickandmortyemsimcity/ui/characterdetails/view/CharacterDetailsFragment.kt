@@ -65,10 +65,20 @@ class CharacterDetailsFragment(
         binding.ivFavorite.setOnClickListener {
             character.isFavorite = !character.isFavorite
 
+            binding.ivFavorite.setImageDrawable(
+                ContextCompat.getDrawable(
+                    binding.root.context,
+                    if (character.isFavorite)
+                        R.drawable.ic_yellow_star
+                    else
+                        R.drawable.ic_white_star
+                )
+            )
+
             //enviar objeto de volta pra lista inicial || lista de fav
             val bundle = bundleOf(UPDATED_CHARACTER to character)
-            NavHostFragment.findNavController(this)
-                .navigate(R.id.action_characterDetailsFragment_to_characterListFragment,bundle)
+//            NavHostFragment.findNavController(this)
+//                .navigate(R.id.action_characterDetailsFragment_to_characterListFragment,bundle)
         }
     }
 
