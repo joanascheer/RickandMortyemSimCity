@@ -18,7 +18,6 @@ import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.Chara
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
-import okhttp3.internal.notifyAll
 
 class CharacterDetailsFragment(
 
@@ -44,10 +43,11 @@ class CharacterDetailsFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         getData()
         initObserver()
+        viewModel.getAllFavoriteCharacters()
     }
+
 
     private fun getData() {
         val character = arguments?.getParcelable<CharacterResult>(CHARACTER_KEY)
@@ -134,7 +134,7 @@ class CharacterDetailsFragment(
                     if (!it.data.isFavorite) {
                         Toast.makeText(
                             context,
-                            "Personagem ${it.data.name} desfavoritado.",
+                            "Personagem ${it.data.name} desfavoritado com sucesso.",
                             Toast.LENGTH_LONG
                         ).show()
                     }

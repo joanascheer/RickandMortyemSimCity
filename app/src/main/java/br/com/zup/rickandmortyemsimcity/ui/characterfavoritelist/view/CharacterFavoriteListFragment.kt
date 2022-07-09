@@ -47,8 +47,9 @@ class CharacterFavoriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initObserver()
         showRecyclerView()
+        viewModel.getAllFavoriteCharacters()
+        initObserver()
     }
 
     override fun onResume() {
@@ -108,7 +109,6 @@ class CharacterFavoriteListFragment : Fragment() {
     }
 
     private fun showRecyclerView() {
-        initObserver()
         binding.rvCharacterFavoriteList.adapter = adapter
         binding.rvCharacterFavoriteList.layoutManager = GridLayoutManager(context, 2)
     }
