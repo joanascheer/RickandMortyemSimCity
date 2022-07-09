@@ -3,6 +3,7 @@ package br.com.zup.rickandmortyemsimcity.ui.characterlist.view
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.JPEG
 import br.com.zup.rickandmortyemsimcity.URL_BASE_IMG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult

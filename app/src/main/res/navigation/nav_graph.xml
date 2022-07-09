@@ -21,7 +21,11 @@
         android:id="@+id/characterDetailsFragment"
         android:name="br.com.zup.rickandmortyemsimcity.ui.characterdetails.view.CharacterDetailsFragment"
         android:label="Detalhes"
-        tools:layout="@layout/fragment_character_details" />
+        tools:layout="@layout/fragment_character_details" >
+        <action
+            android:id="@+id/action_characterDetailsFragment_to_characterListFragment"
+            app:destination="@id/characterListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/characterFavoriteListFragment"
         android:name="br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.view.CharacterFavoriteListFragment"
