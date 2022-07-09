@@ -29,7 +29,11 @@ class CharacterFavoriteListFragment : Fragment() {
     }
 
     private val adapter: CharacterFavoriteListAdapter by lazy {
-        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetail, this::unfavoriteCharacter)
+        CharacterFavoriteListAdapter(
+            arrayListOf(),
+            this::goToCharacterDetail,
+            this::unfavoriteCharacter
+        )
     }
 
     override fun onCreateView(
@@ -43,6 +47,7 @@ class CharacterFavoriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initObserver()
         showRecyclerView()
     }
 
@@ -74,6 +79,26 @@ class CharacterFavoriteListFragment : Fragment() {
                     Toast.makeText(
                         context,
                         EMPTY_LIST_MSG,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else -> {}
+            }
+        }
+
+        viewModel.characterUnfavoriteState.observe(this.viewLifecycleOwner) {
+            when (it) {
+                is ViewState.Success -> {
+                    Toast.makeText(
+                        context,
+                        "Personagem ${it.data.name} desfavoritado.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "${it.throwable.message}",
                         Toast.LENGTH_LONG
                     ).show()
                 }

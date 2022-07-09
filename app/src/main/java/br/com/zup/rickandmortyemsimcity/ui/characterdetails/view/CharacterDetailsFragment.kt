@@ -18,6 +18,7 @@ import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.Chara
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
+import okhttp3.internal.notifyAll
 
 class CharacterDetailsFragment(
 
@@ -101,11 +102,13 @@ class CharacterDetailsFragment(
         viewModel.characterFavoriteState.observe(this.viewLifecycleOwner) {
             when (it) {
                 is ViewState.Success -> {
-                    Toast.makeText(
-                        context,
-                        "O personagem ${it.data.name} foi favoritado com sucesso",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    if (it.data.isFavorite) {
+                        Toast.makeText(
+                            context,
+                            "O personagem ${it.data.name} foi favoritado com sucesso",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
                 is ViewState.Error -> {
                     Toast.makeText(
@@ -125,6 +128,28 @@ class CharacterDetailsFragment(
             }
         }
 
+        viewModel.characterUnfavoriteState.observe(this.viewLifecycleOwner) {
+            when (it) {
+                is ViewState.Success -> {
+                    if (!it.data.isFavorite) {
+                        Toast.makeText(
+                            context,
+                            "Personagem ${it.data.name} desfavoritado.",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+                is ViewState.Error -> {
+                    Toast.makeText(
+                        context,
+                        "${it.throwable.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                else -> {}
+            }
+        }
+
     }
 
     private fun goToCharacterDetails(characterResult: CharacterResult) {
@@ -137,7 +162,6 @@ class CharacterDetailsFragment(
 
     private fun favoriteCharacterUpdate(character: CharacterResult) {
         viewModel.updateCharacterFavorite(character)
-        //cor estrela
     }
 
     private fun unfavoriteCharacter(character: CharacterResult) {
