@@ -45,5 +45,19 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
         }
     }
 
+    fun updateCharacterFavorite(character: CharacterResult) {
+        viewModelScope.launch {
+            try {
+                val response = withContext(Dispatchers.IO) {
+                    characterUseCase.updateFavoriteCharacters(character)
+                }
+                characterFavoriteState.value = response
+            } catch (ex: Exception) {
+                characterFavoriteListState.value =
+                    ViewState.Error(Throwable("Não foi possível atualizar lista de favoritos!"))
+            }
+        }
+    }
+
 
 }

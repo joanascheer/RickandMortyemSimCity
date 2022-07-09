@@ -4,20 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.rickandmortyemsimcity.*
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
+import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.CharacterFavoriteListAdapter
+import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.CharacterFavoriteListViewModel
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
+import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
 
 class CharacterDetailsFragment(
 
 ) : Fragment() {
     private lateinit var binding: FragmentCharacterDetailsBinding
+
+    private val viewModel: CharacterFavoriteListViewModel by lazy {
+        ViewModelProvider(this)[CharacterFavoriteListViewModel::class.java]
+    }
+
+    private val adapter: CharacterFavoriteListAdapter by lazy {
+        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetails)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -82,9 +96,50 @@ class CharacterDetailsFragment(
         }
     }
 
+    private fun initObserver() {
+        viewModel.characterFavoriteState.observe(this.viewLifecycleOwner) {
+        when (it) {
+            is ViewState.Success -> {
+                Toast.makeText(
+                    context,
+                    "O personagem ${it.data.name} foi favoritado com sucesso",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            is ViewState.Error -> {
+                Toast.makeText(
+                    context,
+                    "${it.throwable.message}",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            is ViewState.EmptyList -> {
+                Toast.makeText(
+                    context,
+                    EMPTY_LIST_MSG,
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+            else -> {}
+        }
+        }
+
+    }
+
+    private fun goToCharacterDetails(characterResult: CharacterResult) {
+        val bundle = bundleOf(CHARACTER_KEY to characterResult)
+
+        NavHostFragment.findNavController(this).navigate(
+            R.id.action_characterFavoriteListFragment_to_characterDetailsFragment, bundle
+        )
+    }
+
+    private fun favoriteCharacterUpdate(character: CharacterResult) {
+        viewModel.updateCharacterFavorite(character)
+    }
+
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
 
 }

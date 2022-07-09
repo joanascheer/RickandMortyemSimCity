@@ -30,4 +30,6 @@ class CharacterViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+
+
 }

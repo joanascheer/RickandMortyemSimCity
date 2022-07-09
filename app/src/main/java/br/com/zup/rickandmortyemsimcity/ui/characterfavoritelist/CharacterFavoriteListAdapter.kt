@@ -12,6 +12,7 @@ import com.squareup.picasso.Picasso
 class CharacterFavoriteListAdapter(
     private var characterList: MutableList<CharacterResult>,
     private val clickCharacter: (characterResult: CharacterResult) -> Unit,
+
 ) : RecyclerView.Adapter<CharacterFavoriteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
