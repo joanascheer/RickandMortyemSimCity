@@ -1,10 +1,12 @@
 package br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel
 
 import android.app.Application
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.zup.rickandmortyemsimcity.ERROR_UNFAVORITE_CHARACTER
 import br.com.zup.rickandmortyemsimcity.FAIL_GET_FAVORITE_CHARACTERS
+import br.com.zup.rickandmortyemsimcity.FAIL_UPDATE_FAVORITE_LIST_MSG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.domain.model.SingleLiveEvent
 import br.com.zup.rickandmortyemsimcity.domain.usecase.CharacterUseCase
@@ -17,6 +19,7 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
     private val characterUseCase = CharacterUseCase(application)
     val characterFavoriteState = SingleLiveEvent<ViewState<CharacterResult>>()
     val characterFavoriteListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
+    val characterUnfavoriteState = SingleLiveEvent<ViewState<CharacterResult>>()
 
     fun getAllFavoriteCharacters() {
         viewModelScope.launch {
@@ -41,7 +44,7 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
                 characterFavoriteState.value = response
             } catch (ex: Exception) {
                 characterFavoriteListState.value =
-                    ViewState.Error(Throwable("Não foi possível atualizar lista de favoritos!"))
+                    ViewState.Error(Throwable(FAIL_UPDATE_FAVORITE_LIST_MSG))
             }
         }
     }
@@ -52,9 +55,9 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
                 val response = withContext(Dispatchers.IO) {
                     characterUseCase.updateFavoriteCharacters(character)
                 }
-                characterFavoriteState.value = response
+                characterUnfavoriteState.value = response
             } catch (e: Exception) {
-                characterFavoriteListState.value =
+                characterUnfavoriteState.value =
                     ViewState.Error(Throwable(ERROR_UNFAVORITE_CHARACTER))
             }
         }

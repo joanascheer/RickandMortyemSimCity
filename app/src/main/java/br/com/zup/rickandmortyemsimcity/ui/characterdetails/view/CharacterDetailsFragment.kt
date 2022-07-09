@@ -29,7 +29,7 @@ class CharacterDetailsFragment(
     }
 
     private val adapter: CharacterFavoriteListAdapter by lazy {
-        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetails)
+        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetails, this::unfavoriteCharacter)
     }
 
     override fun onCreateView(
@@ -45,7 +45,7 @@ class CharacterDetailsFragment(
         super.onViewCreated(view, savedInstanceState)
 
         getData()
-
+        initObserver()
     }
 
     private fun getData() {
@@ -72,12 +72,17 @@ class CharacterDetailsFragment(
                         R.drawable.ic_white_star
                 )
             )
+
+
         }
     }
 
     private fun favoriteCharacter(character: CharacterResult) {
         binding.ivFavorite.setOnClickListener {
             character.isFavorite = !character.isFavorite
+            favoriteCharacterUpdate(character)
+            viewModel.unfavoriteCharacter(character)
+            adapter.notifyDataSetChanged()
 
             binding.ivFavorite.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -88,7 +93,7 @@ class CharacterDetailsFragment(
                         R.drawable.ic_white_star
                 )
             )
-            favoriteCharacterUpdate(character)
+
         }
     }
 
@@ -132,6 +137,11 @@ class CharacterDetailsFragment(
 
     private fun favoriteCharacterUpdate(character: CharacterResult) {
         viewModel.updateCharacterFavorite(character)
+        //cor estrela
+    }
+
+    private fun unfavoriteCharacter(character: CharacterResult) {
+        viewModel.unfavoriteCharacter(character)
     }
 
     private fun customAppBar() {

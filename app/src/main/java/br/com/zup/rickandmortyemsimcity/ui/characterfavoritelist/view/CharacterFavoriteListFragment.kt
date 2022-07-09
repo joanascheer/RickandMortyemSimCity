@@ -29,7 +29,7 @@ class CharacterFavoriteListFragment : Fragment() {
     }
 
     private val adapter: CharacterFavoriteListAdapter by lazy {
-        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetail)
+        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetail, this::unfavoriteCharacter)
     }
 
     override fun onCreateView(
@@ -94,6 +94,10 @@ class CharacterFavoriteListFragment : Fragment() {
         NavHostFragment.findNavController(this).navigate(
             R.id.action_characterFavoriteListFragment_to_characterDetailsFragment, bundle
         )
+    }
+
+    private fun unfavoriteCharacter(character: CharacterResult) {
+        viewModel.unfavoriteCharacter(character)
     }
 
 }
