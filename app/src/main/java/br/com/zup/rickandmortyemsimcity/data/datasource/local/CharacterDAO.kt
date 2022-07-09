@@ -1,10 +1,8 @@
 package br.com.zup.rickandmortyemsimcity.data.datasource.local
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
+
 @Dao
 interface CharacterDAO {
 
@@ -13,5 +11,11 @@ interface CharacterDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAllCharacters(charactersList: List<CharacterResult>)
+
+    @Query("SELECT * FROM characters WHERE isFavorite = 1")
+    fun getAllFavoriteCharacters(): List<CharacterResult>
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateFavoriteCharacters(character: CharacterResult)
 
 }
