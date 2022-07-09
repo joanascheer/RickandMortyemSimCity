@@ -2,7 +2,6 @@ package br.com.zup.rickandmortyemsimcity.ui.characterdetails.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
@@ -21,7 +20,7 @@ class CharacterDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCharacterDetailsBinding.inflate(inflater, container, false)
-customAppBar()
+        customAppBar()
         return binding.root
     }
 
