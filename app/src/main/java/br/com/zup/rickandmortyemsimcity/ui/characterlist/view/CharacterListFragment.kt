@@ -2,7 +2,6 @@ package br.com.zup.rickandmortyemsimcity.ui.characterlist.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -45,6 +44,7 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
+        initObserver()
         showRecyclerView()
         clickFloatActionBtn()
     }
@@ -92,7 +92,6 @@ class CharacterListFragment : Fragment() {
     }
 
     private fun showRecyclerView() {
-        initObserver()
         binding.rvCharacterList.adapter = adapter
         binding.rvCharacterList.layoutManager = GridLayoutManager(context, 2)
     }

@@ -13,10 +13,8 @@ import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.rickandmortyemsimcity.*
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
-import br.com.zup.rickandmortyemsimcity.ui.characterdetails.viewmodel.CharacterDetailsViewModel
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.CharacterFavoriteListAdapter
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.CharacterFavoriteListViewModel
-import br.com.zup.rickandmortyemsimcity.ui.characterlist.view.CharacterAdapter
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
@@ -30,17 +28,14 @@ class CharacterDetailsFragment(
         ViewModelProvider(this)[CharacterFavoriteListViewModel::class.java]
     }
 
-    private val viewModelDet: CharacterDetailsViewModel by lazy {
-        ViewModelProvider(this)[CharacterDetailsViewModel::class.java]
-    }
-
     private val adapter: CharacterFavoriteListAdapter by lazy {
-        CharacterFavoriteListAdapter(arrayListOf(), this::goToCharacterDetails, this::unfavoriteCharacter)
+        CharacterFavoriteListAdapter(
+            arrayListOf(),
+            this::goToCharacterDetails,
+            this::unfavoriteCharacter
+        )
     }
 
-    private val adapterPrin: CharacterAdapter by lazy {
-        CharacterAdapter(arrayListOf(), this::goToCharacterDetails)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,11 +88,11 @@ class CharacterDetailsFragment(
 
     private fun favoriteCharacter(character: CharacterResult) {
         binding.ivFavorite.setOnClickListener {
+
             character.isFavorite = !character.isFavorite
             favoriteCharacterUpdate(character)
             viewModel.unfavoriteCharacter(character)
             viewModel.updateCharacterFavorite(character)
-            viewModelDet.updateFavoriteCharacters(character)
             adapter.notifyDataSetChanged()
             //preciso fazer update na lista aqui
 

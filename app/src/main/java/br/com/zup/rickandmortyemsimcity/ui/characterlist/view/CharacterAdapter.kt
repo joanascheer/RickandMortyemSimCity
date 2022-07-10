@@ -2,11 +2,8 @@ package br.com.zup.rickandmortyemsimcity.ui.characterlist.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.JPEG
-import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.URL_BASE_IMG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.CharacterItemBinding
@@ -43,11 +40,6 @@ class CharacterAdapter(
             Picasso.get().load(URL_BASE_IMG + characterResult.id + JPEG)
                 .into(binding.ivCharacter)
             binding.tvCharacterName.text = characterResult.name
-
-            if (characterResult.isFavorite) {
-
-            }
-
         }
 
     }
