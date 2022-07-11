@@ -18,6 +18,7 @@ class CharacterUseCase(application: Application) {
             val characters = characterRepository.getAllCharactersNetwork()
             characterRepository.insertAllCharactersDB(characters.characterResults)
             ViewState.Success(characters.characterResults)
+            getAllCharacters()
         } catch (e: Exception) {
             getAllCharacters()
         }
