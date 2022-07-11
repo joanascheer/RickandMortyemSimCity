@@ -44,15 +44,15 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
-        initObserver() //ok
+        initObserver()
         showRecyclerView()
-        viewModel.getAllCharactersT()
+        viewModel.getAllCharacters()
         clickFloatActionBtn()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getAllCharactersT()
+        viewModel.getAllCharacters()
     }
 
     private fun clickFloatActionBtn() {
@@ -108,6 +108,5 @@ class CharacterListFragment : Fragment() {
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
     }
-
 
 }

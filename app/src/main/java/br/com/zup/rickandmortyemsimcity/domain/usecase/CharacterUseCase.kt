@@ -24,7 +24,7 @@ class CharacterUseCase(application: Application) {
         }
     }
 
-    suspend fun getAllCharacters(): ViewState<List<CharacterResult>> {
+    private fun getAllCharacters(): ViewState<List<CharacterResult>> {
         return try {
             val characters = characterRepository.getAllCharacters()
             if (characters.isEmpty()) {
@@ -37,7 +37,7 @@ class CharacterUseCase(application: Application) {
         }
     }
 
-    suspend fun getAllFavoriteCharacters(): ViewState<List<CharacterResult>> {
+    fun getAllFavoriteCharacters(): ViewState<List<CharacterResult>> {
         return try {
             val characters = characterRepository.getAllFavoriteCharacters()
             if (characters.isEmpty()) {
@@ -50,7 +50,7 @@ class CharacterUseCase(application: Application) {
         }
     }
 
-    suspend fun updateFavoriteCharacters(character: CharacterResult): ViewState<CharacterResult> {
+    fun updateFavoriteCharacters(character: CharacterResult): ViewState<CharacterResult> {
         return try {
             characterRepository.updateFavoriteCharacters(character)
             ViewState.Success(character)

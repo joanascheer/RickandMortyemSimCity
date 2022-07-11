@@ -4,7 +4,7 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_purple</item>
         <item name="colorPrimaryVariant">@color/dark_purple</item>
-        <item name="colorOnPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/dark_purple</item>
         <item name="colorSecondaryVariant">@color/dark_purple</item>
@@ -12,5 +12,9 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+    </style>
+    <style name="Theme.RickAndMortyEmSimCity.NoActionBar">
+        <item name="windowActionBar"> false </item>
+        <item name="windowNoTitle"> true </item>
     </style>
 </resources>

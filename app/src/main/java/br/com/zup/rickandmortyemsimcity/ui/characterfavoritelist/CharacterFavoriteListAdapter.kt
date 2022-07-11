@@ -3,8 +3,6 @@ package br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import br.com.zup.rickandmortyemsimcity.JPEG
-import br.com.zup.rickandmortyemsimcity.URL_BASE_IMG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.CharacterItemBinding
 import com.squareup.picasso.Picasso

@@ -44,10 +44,6 @@ class CharacterFavoriteListFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     override fun onResume() {
         super.onResume()
         initObserver()
@@ -64,7 +60,7 @@ class CharacterFavoriteListFragment : Fragment() {
         viewModel.characterFavoriteListState.observe(this) {
             when (it) {
                 is ViewState.Success -> {
-                    Log.i("LISTA", "${it.data}")
+                    Log.i("LIST", "${it.data}")
                     adapter.updateFavoriteList(it.data.toMutableList())
                 }
                 is ViewState.Error -> {

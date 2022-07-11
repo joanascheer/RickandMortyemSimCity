@@ -17,11 +17,11 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
             Log.w(TAG, SINGLELIVEEVET_LOG_MSG)
         }
 
-        super.observe(owner, Observer { t ->
+        super.observe(owner) { t ->
             if (pending.compareAndSet(true, false)) {
                 observer.onChanged(t)
             }
-        })
+        }
     }
 
     @MainThread
@@ -30,12 +30,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         super.setValue(t)
     }
 
-    @MainThread
-    fun call() {
-        value = null
-    }
-
     companion object {
-        private val TAG = "SingleLiveEvent"
+        private const val TAG = "SingleLiveEvent"
     }
 }

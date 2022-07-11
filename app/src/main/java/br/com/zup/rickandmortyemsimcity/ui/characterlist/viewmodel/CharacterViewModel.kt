@@ -14,17 +14,17 @@ import kotlinx.coroutines.withContext
 
 class CharacterViewModel(application: Application) : AndroidViewModel(application) {
     private val characterUseCase = CharacterUseCase(application)
-    val _characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
+    private var _characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
     val characterListState = _characterListState
 
-    fun getAllCharactersT() {
+    fun getAllCharacters() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {
                     characterUseCase.getAllCharactersNetwork()
                 }
                 characterListState.value = response
-            } catch (e:Exception) {
+            } catch (e: Exception) {
                 characterListState.value =
                     ViewState.Error(Throwable(ERROR_VIEWSTATE_MSG))
             }

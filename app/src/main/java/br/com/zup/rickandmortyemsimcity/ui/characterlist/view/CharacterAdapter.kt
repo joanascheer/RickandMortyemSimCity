@@ -31,7 +31,7 @@ class CharacterAdapter(
     override fun getItemCount() = characterList.size
 
     fun updateCharacterList(newList: MutableList<CharacterResult>) {
-            characterList = newList
+        characterList = newList
         notifyDataSetChanged()
     }
 

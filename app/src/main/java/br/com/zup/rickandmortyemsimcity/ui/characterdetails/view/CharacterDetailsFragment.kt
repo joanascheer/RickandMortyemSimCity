@@ -6,33 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
 import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
-import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.CharacterFavoriteListAdapter
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.CharacterFavoriteListViewModel
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
 import com.squareup.picasso.Picasso
 
-class CharacterDetailsFragment(
-
-) : Fragment() {
+class CharacterDetailsFragment : Fragment() {
     private lateinit var binding: FragmentCharacterDetailsBinding
 
     private val viewModel: CharacterFavoriteListViewModel by lazy {
         ViewModelProvider(this)[CharacterFavoriteListViewModel::class.java]
-    }
-
-    private val adapter: CharacterFavoriteListAdapter by lazy {
-        CharacterFavoriteListAdapter(
-            arrayListOf(),
-            this::goToCharacterDetails
-        )
     }
 
     override fun onCreateView(
@@ -49,12 +37,12 @@ class CharacterDetailsFragment(
         val character = getCharacter()
         character?.let {
             getData(it)
-            click(it)
+            clickOnFavoriteBtn(it)
         }
         initObserver(character)
     }
 
-    private fun click(character: CharacterResult) {
+    private fun clickOnFavoriteBtn(character: CharacterResult) {
 
         binding.ivFavorite.setOnClickListener {
             character.isFavorite = !character.isFavorite
@@ -94,7 +82,8 @@ class CharacterDetailsFragment(
         return arguments?.getParcelable(CHARACTER_KEY)
     }
 
-    private fun initObserver(character: CharacterResult?){
+    private fun initObserver(character: CharacterResult?) {
+
         viewModel.characterFavoriteState.observe(this) {
             character?.let {
                 setCharacterFavoriteStatus(it)
@@ -117,15 +106,6 @@ class CharacterDetailsFragment(
         }
     }
 
-
-    private fun goToCharacterDetails(characterResult: CharacterResult) {
-        val bundle = bundleOf(CHARACTER_KEY to characterResult)
-
-        NavHostFragment.findNavController(this).navigate(
-            R.id.action_characterDetailsFragment_to_characterListFragment, bundle
-        )
-    }
-
     private fun favoriteCharacterUpdate(character: CharacterResult) {
         viewModel.updateCharacterFavorite(character)
     }
@@ -133,6 +113,5 @@ class CharacterDetailsFragment(
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
 
 }

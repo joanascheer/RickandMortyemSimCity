@@ -1,5 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Rick and Morty em SimCity</string>
     <string name="splash_screen_description">Tela de inicialização com imagem dos personagens Rick e Morty em um local de outra dimensão e um portal verde atrás deles.</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rick_and_morty_title">Rick and Morty</string>
+    <string name="character_name_txt">Nome Personagem</string>
+    <string name="character_img_description_txt">Personagem da série Rick and Morty</string>
+    <string name="nome_txt">Nome:</string>
+    <string name="nome_field_txt">Nome do personagem aqui</string>
+    <string name="status_txt">Status:</string>
+    <string name="status_field_txt">Status do personagem aqui</string>
+    <string name="especie_txt">Espécie:</string>
+    <string name="especie_field_txt">Espécie do personagem aqui</string>
+    <string name="genero_txt">Gênero:</string>
+    <string name="genero_field_txt">Gênero do personagem aqui</string>
+    <string name="floating_btn_txt_description">Botão flutuante que leva para a tela de personagens favoritos.</string>
+    <string name="favorite_txt">Favoritos</string>
 </resources>

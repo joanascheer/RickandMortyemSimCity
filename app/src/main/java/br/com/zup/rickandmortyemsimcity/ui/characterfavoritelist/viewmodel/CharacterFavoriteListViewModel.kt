@@ -1,10 +1,8 @@
 package br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel
 
 import android.app.Application
-import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.zup.rickandmortyemsimcity.ERROR_UNFAVORITE_CHARACTER
 import br.com.zup.rickandmortyemsimcity.FAIL_GET_FAVORITE_CHARACTERS
 import br.com.zup.rickandmortyemsimcity.FAIL_UPDATE_FAVORITE_LIST_MSG
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
@@ -19,7 +17,6 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
     private val characterUseCase = CharacterUseCase(application)
     val characterFavoriteState = SingleLiveEvent<ViewState<CharacterResult>>()
     val characterFavoriteListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
-    val characterUnfavoriteState = SingleLiveEvent<ViewState<CharacterResult>>()
 
     fun getAllFavoriteCharacters() {
         viewModelScope.launch {
@@ -48,20 +45,5 @@ class CharacterFavoriteListViewModel(application: Application) : AndroidViewMode
             }
         }
     }
-
-    fun unfavoriteCharacter (character: CharacterResult) {
-        viewModelScope.launch {
-            try {
-                val response = withContext(Dispatchers.IO) {
-                    characterUseCase.updateFavoriteCharacters(character)
-                }
-                characterUnfavoriteState.value = response
-            } catch (e: Exception) {
-                characterUnfavoriteState.value =
-                    ViewState.Error(Throwable(ERROR_UNFAVORITE_CHARACTER))
-            }
-        }
-    }
-
 
 }
