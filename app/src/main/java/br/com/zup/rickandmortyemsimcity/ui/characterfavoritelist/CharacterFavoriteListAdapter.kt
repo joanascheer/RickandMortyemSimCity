@@ -23,6 +23,7 @@ class CharacterFavoriteListAdapter(
         holder.showCharacterInfo(character)
         holder.binding.cvItem.setOnClickListener {
             clickCharacter(character)
+            updateFavoriteList(characterList)
         }
     }
 

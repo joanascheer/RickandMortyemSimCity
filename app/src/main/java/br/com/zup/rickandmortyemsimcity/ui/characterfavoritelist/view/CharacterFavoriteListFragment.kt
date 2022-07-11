@@ -47,8 +47,8 @@ class CharacterFavoriteListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initObserver()
-        showRecyclerView()
         viewModel.getAllFavoriteCharacters()
+        showRecyclerView()
     }
 
     private fun customAppBar() {
@@ -71,6 +71,7 @@ class CharacterFavoriteListFragment : Fragment() {
                     ).show()
                 }
                 is ViewState.EmptyList -> {
+                    adapter.updateFavoriteList(it.data.toMutableList())
                     Toast.makeText(
                         context,
                         EMPTY_LIST_MSG,

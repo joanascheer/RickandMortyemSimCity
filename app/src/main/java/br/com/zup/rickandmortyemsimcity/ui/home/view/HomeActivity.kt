@@ -2,6 +2,7 @@ package br.com.zup.rickandmortyemsimcity.ui.home.view
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import br.com.zup.rickandmortyemsimcity.databinding.ActivityHomeBinding
@@ -15,7 +16,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(binding.root)
         customAppBar()
         supportFragmentManager.findFragmentById(binding.navHostFragment.id) as NavHostFragment
-
     }
 
     private fun customAppBar() {

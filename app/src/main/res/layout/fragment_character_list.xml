@@ -32,8 +32,8 @@
             app:maxImageSize="@dimen/size_40"
             app:backgroundTint="@color/dark_purple"
             android:tintMode="screen"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="@id/rvCharacterList"
+            app:layout_constraintBottom_toBottomOf="@id/rvCharacterList"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
