@@ -10,13 +10,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import br.com.zup.rickandmortyemsimcity.*
+import br.com.zup.rickandmortyemsimcity.CHARACTER_KEY
+import br.com.zup.rickandmortyemsimcity.R
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
 import br.com.zup.rickandmortyemsimcity.databinding.FragmentCharacterDetailsBinding
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.CharacterFavoriteListAdapter
 import br.com.zup.rickandmortyemsimcity.ui.characterfavoritelist.viewmodel.CharacterFavoriteListViewModel
 import br.com.zup.rickandmortyemsimcity.ui.home.view.HomeActivity
-import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.squareup.picasso.Picasso
 
 class CharacterDetailsFragment(
@@ -31,11 +31,9 @@ class CharacterDetailsFragment(
     private val adapter: CharacterFavoriteListAdapter by lazy {
         CharacterFavoriteListAdapter(
             arrayListOf(),
-            this::goToCharacterDetails,
-            this::unfavoriteCharacter
+            this::goToCharacterDetails
         )
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,129 +44,85 @@ class CharacterDetailsFragment(
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        getData()
-        initObserver()
-        viewModel.getAllFavoriteCharacters()
-    }
-
-
-    private fun getData() {
-        val character = arguments?.getParcelable<CharacterResult>(CHARACTER_KEY)
-
-        if (character != null) {
-            viewModel.updateCharacterFavorite(character)
-            favoriteCharacter(character)
-            adapter.notifyDataSetChanged()
-        }
-
+    override fun onResume() {
+        super.onResume()
+        val character = getCharacter()
         character?.let {
-            Picasso.get().load(URL_BASE_IMG + it.id + JPEG).into(binding.ivCharacterDetail)
-            binding.tvCharacterNameFieldDetail.text = it.name
-            binding.tvCharacterStatusFieldDetail.text = it.status
-            binding.tvCharacterSpeciesFieldDetail.text = it.species
-            binding.tvCharacterGenderFieldDetail.text = it.gender
-
-
-            binding.ivFavorite.setImageDrawable(
-                ContextCompat.getDrawable(
-                    binding.root.context,
-                    if (character.isFavorite)
-                        R.drawable.ic_yellow_star
-                    else
-                        R.drawable.ic_white_star
-                )
-            )
-
-            (activity as HomeActivity).supportActionBar?.title = it.name
-
+            getData(it)
+            click(it)
         }
+        initObserver(character)
     }
 
-    private fun favoriteCharacter(character: CharacterResult) {
-        binding.ivFavorite.setOnClickListener {
+    private fun click(character: CharacterResult) {
 
+        binding.ivFavorite.setOnClickListener {
             character.isFavorite = !character.isFavorite
             favoriteCharacterUpdate(character)
-            viewModel.unfavoriteCharacter(character)
-            viewModel.updateCharacterFavorite(character)
-            adapter.notifyDataSetChanged()
-            //preciso fazer update na lista aqui
+        }
 
-            binding.ivFavorite.setImageDrawable(
-                ContextCompat.getDrawable(
-                    binding.root.context,
-                    if (character.isFavorite)
-                        R.drawable.ic_yellow_star
-                    else
-                        R.drawable.ic_white_star
-                )
+    }
+
+    private fun setCharacterFavoriteStatus(character: CharacterResult) {
+        binding.ivFavorite.setImageDrawable(
+            ContextCompat.getDrawable(
+                binding.root.context,
+                if (character.isFavorite)
+                    R.drawable.ic_yellow_star
+                else
+                    R.drawable.ic_white_star
             )
+        )
+    }
+
+    private fun getData(character: CharacterResult) {
+
+        character.apply {
+            Picasso.get().load(image).into(binding.ivCharacterDetail)
+            binding.tvCharacterNameFieldDetail.text = name
+            binding.tvCharacterStatusFieldDetail.text = status
+            binding.tvCharacterSpeciesFieldDetail.text = species
+            binding.tvCharacterGenderFieldDetail.text = gender
+            setCharacterFavoriteStatus(character)
+
+            (activity as HomeActivity).supportActionBar?.title = name
 
         }
     }
 
-    private fun initObserver() {
-        viewModel.characterFavoriteState.observe(this.viewLifecycleOwner) {
-            when (it) {
-                is ViewState.Success -> {
-                    if (it.data.isFavorite) {
-                        Toast.makeText(
-                            context,
-                            "O personagem ${it.data.name} foi favoritado com sucesso",
-                            Toast.LENGTH_LONG
-                        ).show()
-                    }
-                }
-                is ViewState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "${it.throwable.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                is ViewState.EmptyList -> {
-                    Toast.makeText(
-                        context,
-                        EMPTY_LIST_MSG,
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                else -> {}
-            }
-        }
-
-        viewModel.characterUnfavoriteState.observe(this.viewLifecycleOwner) {
-            when (it) {
-                is ViewState.Success -> {
-                    if (!it.data.isFavorite) {
-                        Toast.makeText(
-                            context,
-                            "Personagem ${it.data.name} desfavoritado com sucesso.",
-                            Toast.LENGTH_LONG
-                        ).show()
-
-                    }
-                }
-                is ViewState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "${it.throwable.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                else -> {}
-            }
-        }
-
+    private fun getCharacter(): CharacterResult? {
+        return arguments?.getParcelable(CHARACTER_KEY)
     }
+
+    private fun initObserver(character: CharacterResult?){
+        viewModel.characterFavoriteState.observe(this) {
+            character?.let {
+                setCharacterFavoriteStatus(it)
+
+                if (it.isFavorite) {
+                    Toast.makeText(
+                        context,
+                        "O personagem ${it.name} foi favoritado com sucesso",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        context,
+                        "Personagem ${it.name} desfavoritado com sucesso.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+
+            }
+        }
+    }
+
 
     private fun goToCharacterDetails(characterResult: CharacterResult) {
         val bundle = bundleOf(CHARACTER_KEY to characterResult)
 
         NavHostFragment.findNavController(this).navigate(
-            R.id.action_characterFavoriteListFragment_to_characterDetailsFragment, bundle
+            R.id.action_characterDetailsFragment_to_characterListFragment, bundle
         )
     }
 
@@ -176,12 +130,9 @@ class CharacterDetailsFragment(
         viewModel.updateCharacterFavorite(character)
     }
 
-    private fun unfavoriteCharacter(character: CharacterResult) {
-        viewModel.unfavoriteCharacter(character)
-    }
-
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
 
 }

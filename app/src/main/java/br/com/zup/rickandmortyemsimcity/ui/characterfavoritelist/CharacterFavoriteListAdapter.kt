@@ -10,10 +10,8 @@ import br.com.zup.rickandmortyemsimcity.databinding.CharacterItemBinding
 import com.squareup.picasso.Picasso
 
 class CharacterFavoriteListAdapter(
-    private var characterList: MutableList<CharacterResult>,
-    private val clickCharacter: (characterResult: CharacterResult) -> Unit,
-    private val clickUnfavoriteCharacter: (character: CharacterResult) -> Unit,
-
+    private var characterList: MutableList<CharacterResult> = mutableListOf(),
+    private val clickCharacter: (characterResult: CharacterResult) -> Unit
 ) : RecyclerView.Adapter<CharacterFavoriteListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -24,15 +22,10 @@ class CharacterFavoriteListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val character = characterList[position]
-            holder.showCharacterInfo(character)
-
-
+        holder.showCharacterInfo(character)
         holder.binding.cvItem.setOnClickListener {
             clickCharacter(character)
-
         }
-
-        holder.showCharacterInfo(character)
     }
 
     override fun getItemCount() = characterList.size
@@ -44,7 +37,7 @@ class CharacterFavoriteListAdapter(
 
     class ViewHolder(val binding: CharacterItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun showCharacterInfo(characterResult: CharacterResult) {
-            Picasso.get().load(URL_BASE_IMG + characterResult.id + JPEG)
+            Picasso.get().load(characterResult.image)
                 .into(binding.ivCharacter)
             binding.tvCharacterName.text = characterResult.name
         }

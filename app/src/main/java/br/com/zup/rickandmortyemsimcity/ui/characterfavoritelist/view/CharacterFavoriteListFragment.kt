@@ -30,9 +30,8 @@ class CharacterFavoriteListFragment : Fragment() {
 
     private val adapter: CharacterFavoriteListAdapter by lazy {
         CharacterFavoriteListAdapter(
-            arrayListOf(),
-            this::goToCharacterDetail,
-            this::unfavoriteCharacter
+            mutableListOf(),
+            this::goToCharacterDetail
         )
     }
 
@@ -47,15 +46,17 @@ class CharacterFavoriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showRecyclerView()
-        viewModel.getAllFavoriteCharacters()
-        initObserver()
+//        initObserver()
+//        showRecyclerView()
+//        viewModel.getAllFavoriteCharacters()
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        viewModel.getAllFavoriteCharacters()
-//    }
+    override fun onResume() {
+        super.onResume()
+        initObserver()
+        showRecyclerView()
+        viewModel.getAllFavoriteCharacters()
+    }
 
     private fun customAppBar() {
         (activity as HomeActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -63,7 +64,7 @@ class CharacterFavoriteListFragment : Fragment() {
     }
 
     private fun initObserver() {
-        viewModel.characterFavoriteListState.observe(this.viewLifecycleOwner) {
+        viewModel.characterFavoriteListState.observe(this) {
             when (it) {
                 is ViewState.Success -> {
                     Log.i("LISTA", "${it.data}")
@@ -87,25 +88,6 @@ class CharacterFavoriteListFragment : Fragment() {
             }
         }
 
-        viewModel.characterUnfavoriteState.observe(this.viewLifecycleOwner) {
-            when (it) {
-                is ViewState.Success -> {
-                    Toast.makeText(
-                        context,
-                        "Personagem ${it.data.name} desfavoritado.",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                is ViewState.Error -> {
-                    Toast.makeText(
-                        context,
-                        "${it.throwable.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
-                else -> {}
-            }
-        }
     }
 
     private fun showRecyclerView() {
@@ -119,10 +101,6 @@ class CharacterFavoriteListFragment : Fragment() {
         NavHostFragment.findNavController(this).navigate(
             R.id.action_characterFavoriteListFragment_to_characterDetailsFragment, bundle
         )
-    }
-
-    private fun unfavoriteCharacter(character: CharacterResult) {
-        viewModel.unfavoriteCharacter(character)
     }
 
 }

@@ -14,9 +14,10 @@ import kotlinx.coroutines.withContext
 
 class CharacterViewModel(application: Application) : AndroidViewModel(application) {
     private val characterUseCase = CharacterUseCase(application)
-    val characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
+    val _characterListState = SingleLiveEvent<ViewState<List<CharacterResult>>>()
+    val characterListState = _characterListState
 
-    fun getAllCharactersNetwork() {
+    fun getAllCharactersT() {
         viewModelScope.launch {
             try {
                 val response = withContext(Dispatchers.IO) {

@@ -44,14 +44,15 @@ class CharacterListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as HomeActivity).supportActionBar?.title =
             getString(R.string.rick_and_morty_title)
-        initObserver()
+        initObserver() //ok
         showRecyclerView()
+        viewModel.getAllCharactersT()
         clickFloatActionBtn()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getAllCharactersNetwork()
+        viewModel.getAllCharactersT()
     }
 
     private fun clickFloatActionBtn() {
@@ -67,7 +68,6 @@ class CharacterListFragment : Fragment() {
 
     private fun initObserver() {
         viewModel.characterListState.observe(this.viewLifecycleOwner) {
-
             when (it) {
                 is ViewState.Success -> {
                     adapter.updateCharacterList(it.data.toMutableList())

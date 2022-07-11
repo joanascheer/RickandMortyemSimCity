@@ -9,13 +9,13 @@ interface CharacterDAO {
     @Query("SELECT * FROM characters ORDER BY name ASC")
     fun getAllCharacters(): List<CharacterResult>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertAllCharacters(charactersList: List<CharacterResult>)
 
     @Query("SELECT * FROM characters WHERE isFavorite = 1")
     fun getAllFavoriteCharacters(): List<CharacterResult>
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Update(onConflict = OnConflictStrategy.IGNORE)
     fun updateFavoriteCharacters(character: CharacterResult)
 
 }
