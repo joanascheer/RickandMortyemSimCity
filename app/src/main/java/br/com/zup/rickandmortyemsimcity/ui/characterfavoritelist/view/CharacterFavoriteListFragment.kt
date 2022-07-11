@@ -46,9 +46,6 @@ class CharacterFavoriteListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        initObserver()
-//        showRecyclerView()
-//        viewModel.getAllFavoriteCharacters()
     }
 
     override fun onResume() {

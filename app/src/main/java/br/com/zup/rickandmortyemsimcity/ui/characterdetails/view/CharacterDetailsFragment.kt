@@ -108,7 +108,7 @@ class CharacterDetailsFragment(
                 } else {
                     Toast.makeText(
                         context,
-                        "Personagem ${it.name} desfavoritado com sucesso.",
+                        "O Personagem ${it.name} foi desfavoritado com sucesso.",
                         Toast.LENGTH_LONG
                     ).show()
                 }
