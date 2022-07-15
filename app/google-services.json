@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "19282445638",
+    "project_id": "rick-and-morty-em-sim-city",
+    "storage_bucket": "rick-and-morty-em-sim-city.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:19282445638:android:be5aa9ad53bd461f36d147",
+        "android_client_info": {
+          "package_name": "br.com.zup.rickandmortyemsimcity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "19282445638-cb7tfq4ss8r534aldnl5lo1jjckfi5og.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEqqk9pWQSaVdjlqxD4-peZrf8Ds5DfDE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "19282445638-cb7tfq4ss8r534aldnl5lo1jjckfi5og.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

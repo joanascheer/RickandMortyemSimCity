@@ -9,4 +9,5 @@
     <dimen name="txt_size_15">15sp</dimen>
     <dimen name="size_40">40dp</dimen>
     <dimen name="corner_8">8dp</dimen>
+    <dimen name="txt_size_16">16sp</dimen>
 </resources>

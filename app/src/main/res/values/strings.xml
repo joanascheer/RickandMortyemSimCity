@@ -15,4 +15,10 @@
     <string name="genero_field_txt">Gênero do personagem aqui</string>
     <string name="floating_btn_txt_description">Botão flutuante que leva para a tela de personagens favoritos.</string>
     <string name="favorite_txt">Favoritos</string>
+    <string name="rick_login_screen_desc">Rick dentro de um portal verde fuorescente com cara de assustado e babando.</string>
+    <string name="cadastrar_txt">Cadastrar</string>
+    <string name="password_txt">Password</string>
+    <string name="e_mail_txt">E-mail</string>
+    <string name="nome_char_txt">Nome</string>
+    <string name="register_user_txt">registrar</string>
 </resources>

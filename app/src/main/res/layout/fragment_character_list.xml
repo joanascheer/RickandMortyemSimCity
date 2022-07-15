@@ -7,6 +7,7 @@
     tools:context=".ui.characterlist.view.CharacterListFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_16"
@@ -30,10 +31,9 @@
             android:contentDescription="@string/floating_btn_txt_description"
             android:src="@drawable/ic_white_star"
             app:maxImageSize="@dimen/size_40"
-            app:backgroundTint="@color/dark_purple"
-            android:tintMode="screen"
-            app:layout_constraintRight_toRightOf="@id/rvCharacterList"
-            app:layout_constraintBottom_toBottomOf="@id/rvCharacterList"
+            android:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
