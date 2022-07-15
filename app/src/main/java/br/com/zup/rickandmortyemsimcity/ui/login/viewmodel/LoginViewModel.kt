@@ -15,8 +15,6 @@ import br.com.zup.rickandmortyemsimcity.domain.repository.CharacterRepository
 import br.com.zup.rickandmortyemsimcity.domain.usecase.CharacterUseCase
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private val characterDao = CharacterDatabase.getDatabase(application).characterDao()
-    private val repository = CharacterRepository(characterDao)
     private val characterUseCase = CharacterUseCase(application)
 
     private var _loginState = MutableLiveData<User>()

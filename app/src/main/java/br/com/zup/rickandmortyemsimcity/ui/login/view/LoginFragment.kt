@@ -40,7 +40,7 @@ class LoginFragment : Fragment() {
 
         binding.btnEnter.setOnClickListener {
             val user = getData()
-            navigateHome(user)
+            viewModel.validateData(user)
         }
 
         return binding.root

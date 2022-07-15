@@ -1,11 +1,13 @@
 package br.com.zup.rickandmortyemsimcity.domain.usecase
 
 import android.app.Application
+import android.view.View
 import br.com.zup.rickandmortyemsimcity.ERROR_VIEWSTATE_MSG
 import br.com.zup.rickandmortyemsimcity.FAIL_LOAD_FAVORITE_LIST_MSG
 import br.com.zup.rickandmortyemsimcity.FAIL_UPDATE_FAVORITE_LIST_MSG
 import br.com.zup.rickandmortyemsimcity.data.datasource.local.CharacterDatabase
 import br.com.zup.rickandmortyemsimcity.data.model.CharacterResult
+import br.com.zup.rickandmortyemsimcity.domain.model.User
 import br.com.zup.rickandmortyemsimcity.domain.repository.CharacterRepository
 import br.com.zup.rickandmortyemsimcity.ui.viewstate.ViewState
 import com.google.android.gms.tasks.Task
@@ -18,7 +20,6 @@ import com.google.firebase.ktx.Firebase
 class CharacterUseCase(application: Application) {
     private val characterDao = CharacterDatabase.getDatabase(application).characterDao()
     private val characterRepository = CharacterRepository(characterDao)
-    private val auth: FirebaseAuth = Firebase.auth
 
     suspend fun getAllCharactersNetwork(): ViewState<List<CharacterResult>> {
         return try {
@@ -67,26 +68,22 @@ class CharacterUseCase(application: Application) {
     }
 
     fun registerUser (email: String, password: String) : Task<AuthResult> {
-        return auth.createUserWithEmailAndPassword(email, password)
+        return characterRepository.registerUser(email, password)
     }
 
     fun updateUserProfile (name: String ): Task<Void>? {
-        val profile = UserProfileChangeRequest.Builder().setDisplayName(name).build()
-        return auth.currentUser?.updateProfile(profile)
+        return characterRepository.updateUserProfile(name)
     }
 
     fun logoutOut() {
-        auth.signOut()
+        characterRepository.logoutOut()
     }
 
     fun loginUser (email: String, password: String): Task<AuthResult> {
-        return auth.signInWithEmailAndPassword(email, password)}
+        return characterRepository.loginUser(email,password)}
 
-    fun getUser() = auth.currentUser
+    fun getUser() = characterRepository.getUser()
 
-    fun getNameUser(): String? = auth.currentUser?.displayName
-
-    fun getEmailUser(): String? = auth.currentUser?.email
 
 
 }
