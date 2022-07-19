@@ -34,7 +34,7 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.btnRegistration?.setOnClickListener {
+        binding.btnRegistration.setOnClickListener {
             val user = getData()
             viewModel.validateData(user)
         }

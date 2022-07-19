@@ -21,4 +21,5 @@
     <string name="e_mail_txt">E-mail</string>
     <string name="nome_char_txt">Nome</string>
     <string name="register_user_txt">registrar</string>
+    <string name="sair_txt">Sair</string>
 </resources>

@@ -48,6 +48,18 @@ class CharacterListFragment : Fragment() {
         initObserver()
         viewModel.getAllCharacters()
         clickFloatActionBtn()
+        binding.tvLogout.setOnClickListener {
+            viewModel.logOut()
+            exit()
+        }
+    }
+    private fun exit() {
+        Toast.makeText(
+            context,
+            "Até mais",
+            Toast.LENGTH_SHORT
+        ).show()
+        NavHostFragment.findNavController(this).navigate(R.id.action_characterListFragment_to_loginFragment)
     }
 
     private fun clickFloatActionBtn() {

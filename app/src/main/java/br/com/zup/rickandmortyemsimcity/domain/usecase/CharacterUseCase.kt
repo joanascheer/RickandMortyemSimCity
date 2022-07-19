@@ -67,7 +67,7 @@ class CharacterUseCase(application: Application) {
         }
     }
 
-
+    fun logOut() = characterRepository.logout()
 
 
 

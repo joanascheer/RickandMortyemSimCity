@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_characterListFragment_to_characterFavoriteListFragment"
             app:destination="@id/characterFavoriteListFragment" />
+        <action
+            android:id="@+id/action_characterListFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/characterDetailsFragment"

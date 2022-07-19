@@ -13,6 +13,17 @@
         android:layout_margin="@dimen/margin_16"
         >
 
+        <TextView
+            android:id="@+id/tvLogout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sair_txt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/rvCharacterList"
+            android:gravity="end"
+            android:layout_margin="@dimen/margin_16"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCharacterList"
             android:layout_width="match_parent"

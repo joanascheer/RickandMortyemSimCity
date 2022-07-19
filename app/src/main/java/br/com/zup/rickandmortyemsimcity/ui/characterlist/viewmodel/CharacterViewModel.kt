@@ -31,4 +31,6 @@ class CharacterViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
+    fun logOut() = characterUseCase.logOut()
+
 }
