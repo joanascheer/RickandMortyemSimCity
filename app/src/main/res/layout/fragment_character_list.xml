@@ -40,12 +40,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_16"
             android:contentDescription="@string/floating_btn_txt_description"
-            android:src="@drawable/ic_white_star"
-            app:maxImageSize="@dimen/size_40"
-            android:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            />
+            app:maxImageSize="@dimen/size_40"
+            android:foreground="@drawable/ic_white_star" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
