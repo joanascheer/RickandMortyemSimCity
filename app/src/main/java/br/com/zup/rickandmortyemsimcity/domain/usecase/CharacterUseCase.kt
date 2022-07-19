@@ -67,22 +67,7 @@ class CharacterUseCase(application: Application) {
         }
     }
 
-    fun registerUser (email: String, password: String) : Task<AuthResult> {
-        return characterRepository.registerUser(email, password)
-    }
 
-    fun updateUserProfile (name: String ): Task<Void>? {
-        return characterRepository.updateUserProfile(name)
-    }
-
-    fun logoutOut() {
-        characterRepository.logoutOut()
-    }
-
-    fun loginUser (email: String, password: String): Task<AuthResult> {
-        return characterRepository.loginUser(email,password)}
-
-    fun getUser() = characterRepository.getUser()
 
 
 

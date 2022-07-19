@@ -30,24 +30,29 @@ class CharacterRepository(private val characterDao: CharacterDAO) {
         characterDao.updateFavoriteCharacters(character)
     }
 
-    fun registerUser (email: String, password: String) : Task<AuthResult> {
-        return auth.createUserWithEmailAndPassword(email, password)
-    }
-
-    fun updateUserProfile (name: String ): Task<Void>? {
-        val profile = UserProfileChangeRequest.Builder().setDisplayName(name).build()
-        return auth.currentUser?.updateProfile(profile)
-    }
-
-    fun logoutOut() {
-        auth.signOut()
-    }
-
-    fun loginUser (email: String, password: String): Task<AuthResult> {
+    fun loginUser(email: String, password: String): Task<AuthResult> {
         return auth.signInWithEmailAndPassword(email, password)
     }
 
-    fun getUser() = auth.currentUser
+    fun logout(){
+        auth.signOut()
+    }
+
+    fun registerUser(email: String, password: String): Task<AuthResult> {
+        return auth.createUserWithEmailAndPassword(email, password)
+    }
+
+    fun updateUserName(name: String): Task<Void>? {
+        val profile = UserProfileChangeRequest.Builder()
+            .setDisplayName(name).build()
+        return auth.currentUser?.updateProfile(profile)
+    }
+
+    fun getCurrentUser() = auth.currentUser
+
+    fun getName(): String? = auth.currentUser?.displayName
+
+    fun getEmail(): String? = auth.currentUser?.email
 
 
 

@@ -9,24 +9,26 @@ import br.com.zup.rickandmortyemsimcity.EMAIL_ERROR_MESSAGE
 import br.com.zup.rickandmortyemsimcity.LOGIN_ERROR_MESSAGE
 import br.com.zup.rickandmortyemsimcity.NAME_ERROR_MESSAGE
 import br.com.zup.rickandmortyemsimcity.PASSWORD_ERROR_MESSAGE
+import br.com.zup.rickandmortyemsimcity.data.datasource.local.CharacterDAO
 import br.com.zup.rickandmortyemsimcity.data.datasource.local.CharacterDatabase
 import br.com.zup.rickandmortyemsimcity.domain.model.User
 import br.com.zup.rickandmortyemsimcity.domain.repository.CharacterRepository
 import br.com.zup.rickandmortyemsimcity.domain.usecase.CharacterUseCase
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
-    private val characterUseCase = CharacterUseCase(application)
+    private val characterDao = CharacterDatabase.getDatabase(application).characterDao()
+    private val characterRepository = CharacterRepository(characterDao)
 
     private var _loginState = MutableLiveData<User>()
     val loginState: LiveData<User> = _loginState
     private var _errorState = MutableLiveData<String>()
     val errorState: LiveData<String> = _errorState
 
-    fun getUser() = characterUseCase.getUser()
+    fun getUser() = characterRepository.getCurrentUser()
 
     private fun login(user: User) {
         try {
-            characterUseCase.loginUser(user.email, user.password).addOnSuccessListener {
+            characterRepository.loginUser(user.email, user.password).addOnSuccessListener {
                 _loginState.value = user
             }.addOnFailureListener {
                 _errorState.value = LOGIN_ERROR_MESSAGE

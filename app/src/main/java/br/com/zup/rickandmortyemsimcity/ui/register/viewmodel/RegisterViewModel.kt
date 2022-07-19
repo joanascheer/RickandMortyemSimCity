@@ -14,18 +14,19 @@ import br.com.zup.rickandmortyemsimcity.domain.repository.CharacterRepository
 import br.com.zup.rickandmortyemsimcity.domain.usecase.CharacterUseCase
 
 class RegisterViewModel(application: Application) : AndroidViewModel(application) {
-    private val characterUseCase = CharacterUseCase(application)
     private val characterDao = CharacterDatabase.getDatabase(application).characterDao()
     private val characterRepository = CharacterRepository(characterDao)
+
     private var _registerState = MutableLiveData<User>()
     val registerState: LiveData<User> = _registerState
+
     private var _errorState = MutableLiveData<String>()
     val errorState: LiveData<String> = _errorState
 
     private fun registerUser(user: User) {
         try {
-            characterUseCase.registerUser(user.email, user.password).addOnSuccessListener {
-                characterUseCase.updateUserProfile(user.name)?.addOnSuccessListener {
+            characterRepository.registerUser(user.email, user.password).addOnSuccessListener {
+                characterRepository.updateUserName(user.name)?.addOnSuccessListener {
                     _registerState.value = user
                 }
             }.addOnFailureListener {

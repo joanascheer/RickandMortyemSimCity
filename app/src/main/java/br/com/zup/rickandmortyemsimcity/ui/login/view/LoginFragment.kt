@@ -17,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
+
     private val viewModel: LoginViewModel by lazy {
         ViewModelProvider(this)[LoginViewModel::class.java]
     }
@@ -48,8 +49,8 @@ class LoginFragment : Fragment() {
 
     private fun getData(): User {
         return User(
-            email = binding.etEmailLogin?.text.toString(),
-            password = binding.etPassLogin?.text.toString()
+            email = binding.etEmailLogin.text.toString(),
+            password = binding.etPassLogin.text.toString()
         )
     }
 

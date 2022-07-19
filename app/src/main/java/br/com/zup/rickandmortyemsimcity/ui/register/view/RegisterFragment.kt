@@ -27,26 +27,32 @@ class RegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
-        binding.btnRegister?.setOnClickListener {
+
+        return binding.root
+
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.btnRegistration?.setOnClickListener {
             val user = getData()
             viewModel.validateData(user)
         }
         initObservers()
-        return binding.root
     }
 
 
     private fun getData(): User {
         return User(
             name = binding.etRegisterName.text.toString(),
-            email = binding.etRegisterEmail.text.toString(),
+            email = binding.etRegisterEmail .text.toString(),
             password = binding.etRegisterPassword.text.toString()
         )
     }
 
     private fun initObservers() {
         viewModel.registerState.observe(this.viewLifecycleOwner) {
-            goToLogin(it)
+            goToHome(it)
         }
 
         viewModel.errorState.observe(this.viewLifecycleOwner) {
@@ -58,10 +64,10 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun goToLogin(user: User) {
+    private fun goToHome(user: User) {
         val bundle = bundleOf(USER_KEY to user)
         NavHostFragment.findNavController(this)
-            .navigate(R.id.action_registerFragment_to_loginFragment, bundle)
+            .navigate(R.id.action_registerFragment_to_characterListFragment, bundle)
     }
 
 }
